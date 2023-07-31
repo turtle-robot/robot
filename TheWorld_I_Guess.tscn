@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://b5smk32rvks0v"]
+
+[ext_resource type="PackedScene" uid="uid://baf15220grttu" path="res://car_parts/tank.tscn" id="1_nbjv6"]
+[ext_resource type="Material" uid="uid://du1earkxy28p3" path="res://Ground.tres" id="3_yvwal"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_yp57b"]
+size = Vector2(200, 200)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_ye1mm"]
+
+[node name="WorldIG" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.891379, -0.404815, 0.203884, -3.95564e-18, 0.449818, 0.89312, -0.453259, -0.796108, 0.400958, 0.00449371, -0.0121653, 0.0481868)
+
+[node name="GroundIG" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GroundIG"]
+material_override = ExtResource("3_yvwal")
+mesh = SubResource("PlaneMesh_yp57b")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GroundIG"]
+shape = SubResource("WorldBoundaryShape3D_ye1mm")
+
+[node name="VehicleBody3D" parent="." instance=ExtResource("1_nbjv6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2, 2.08165e-12)
+linear_velocity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+
+[node name="Camera3D" type="Camera3D" parent="VehicleBody3D"]
+transform = Transform3D(-1, 2.096e-08, -8.4873e-08, -1.6585e-26, 0.970834, 0.239754, 8.74228e-08, 0.239754, -0.970834, 0.0121717, 2.18963, -6.20064)

@@ -1,0 +1,75 @@
+[gd_scene load_steps=8 format=3 uid="uid://baf15220grttu"]
+
+[ext_resource type="Shape3D" uid="uid://d4iea6yuwkrq1" path="res://car_parts/tank_collider_array.tres" id="1_a05lj"]
+[ext_resource type="Script" path="res://car_parts/tank.gd" id="1_i5jhv"]
+[ext_resource type="Material" uid="uid://dxk6d56le54rd" path="res://car_parts/TankBody.tres" id="2_kql8l"]
+[ext_resource type="PackedScene" uid="uid://cybb6xst5ajd2" path="res://car_parts/wheel.tscn" id="3_38dfs"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_6nbdy"]
+size = Vector3(2, 1, 6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_sauxo"]
+size = Vector3(2, 1, 4)
+
+[sub_resource type="PrismMesh" id="PrismMesh_o6gts"]
+left_to_right = 1.11022e-16
+size = Vector3(1, 1, 2)
+
+[node name="VehicleBody3D" type="VehicleBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29179, 0)
+script = ExtResource("1_i5jhv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = ExtResource("1_a05lj")
+
+[node name="BodyBox" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+material_override = ExtResource("2_kql8l")
+mesh = SubResource("BoxMesh_6nbdy")
+
+[node name="BodyBox2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = ExtResource("2_kql8l")
+mesh = SubResource("BoxMesh_sauxo")
+
+[node name="FrontAngle" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.5, 2.5)
+material_override = ExtResource("2_kql8l")
+mesh = SubResource("PrismMesh_o6gts")
+skeleton = NodePath("../BodyBox")
+
+[node name="BackAngle" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.5, -2.5)
+material_override = ExtResource("2_kql8l")
+mesh = SubResource("PrismMesh_o6gts")
+skeleton = NodePath("../BodyBox")
+
+[node name="Wheel_L1" parent="." instance=ExtResource("3_38dfs")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1.2, -0.5, 3)
+
+[node name="Wheel_L2" parent="." instance=ExtResource("3_38dfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, -1, 1.5)
+
+[node name="Wheel_L3" parent="." instance=ExtResource("3_38dfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, -1, 0)
+
+[node name="Wheel_L4" parent="." instance=ExtResource("3_38dfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, -1, -1.5)
+
+[node name="Wheel_L5" parent="." instance=ExtResource("3_38dfs")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.2, -0.5, -3)
+
+[node name="Wheel_R1" parent="." instance=ExtResource("3_38dfs")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.2, -0.5, 2.9)
+
+[node name="Wheel_R2" parent="." instance=ExtResource("3_38dfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, -1, 1.4)
+
+[node name="Wheel_R3" parent="." instance=ExtResource("3_38dfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, -1, -0.1)
+
+[node name="Wheel_R4" parent="." instance=ExtResource("3_38dfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, -1, -1.6)
+
+[node name="Wheel_R5" parent="." instance=ExtResource("3_38dfs")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1.2, -0.5, -3.1)

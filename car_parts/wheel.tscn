@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cybb6xst5ajd2"]
+
+[ext_resource type="Material" uid="uid://cmty7o6unvhjf" path="res://car_parts/WheelMaterial.tres" id="1_rjkwi"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_8u013"]
+height = 0.4
+
+[node name="VehicleWheel3D" type="VehicleWheel3D"]
+use_as_traction = true
+wheel_friction_slip = 1.0
+suspension_travel = 0.25
+suspension_stiffness = 25.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("1_rjkwi")
+mesh = SubResource("CylinderMesh_8u013")
