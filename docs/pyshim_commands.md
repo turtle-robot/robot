@@ -7,7 +7,7 @@ it requires no arguments
 
 ## `throttle <left> <right>`
 
-this sets the throttle of the left motor
+this sets the throttle of the left and right motors
 
 accepts floats between `-1.0` and `1.0`
 
