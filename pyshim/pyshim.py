@@ -7,9 +7,13 @@ CC-BY-NC-SA
 
 import sys
 
+import time
+from adafruit_servokit import ServoKit
 from adafruit_motorkit import MotorKit
 
-kit = MotorKit()
+
+mk = MotorKit(address=0x60)
+sk = ServoKit(address=0x60)
 
 def test_throttle_oob(value):
     if value > 1.0:
@@ -34,8 +38,11 @@ def main():
                     sys.stderr.write("RIGHT THROTTLE OUT OF BOUNDS")
                     break
                 # set motor throttles, Left=1, Right=2
-                kit.motor1.throttle = left
-                kit.motor2.throttle = right
+                mk.motor1.throttle = left
+                mk.motor2.throttle = right
+            case ("gimbal", pan, tilt):
+                sk.servo[0] = pan
+                sk.servo[1] = tilt
 
 
 
