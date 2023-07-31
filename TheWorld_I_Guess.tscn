@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://b5smk32rvks0v"]
+[gd_scene load_steps=6 format=3 uid="uid://b5smk32rvks0v"]
 
+[ext_resource type="Script" path="res://TheWorld_I_Guess.gd" id="1_08rfn"]
 [ext_resource type="PackedScene" uid="uid://baf15220grttu" path="res://car_parts/tank.tscn" id="1_nbjv6"]
 [ext_resource type="Material" uid="uid://du1earkxy28p3" path="res://Ground.tres" id="3_yvwal"]
 
@@ -9,6 +10,7 @@ size = Vector2(200, 200)
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_ye1mm"]
 
 [node name="WorldIG" type="Node3D"]
+script = ExtResource("1_08rfn")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.891379, -0.404815, 0.203884, -3.95564e-18, 0.449818, 0.89312, -0.453259, -0.796108, 0.400958, 0.00449371, -0.0121653, 0.0481868)
@@ -29,3 +31,6 @@ linear_velocity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 
 [node name="Camera3D" type="Camera3D" parent="VehicleBody3D"]
 transform = Transform3D(-1, 2.096e-08, -8.4873e-08, -1.6585e-26, 0.970834, 0.239754, 8.74228e-08, 0.239754, -0.970834, 0.0121717, 2.18963, -6.20064)
+
+[connection signal="emit_drive" from="." to="VehicleBody3D" method="set_drive_command"]
+[connection signal="emit_gibal" from="." to="VehicleBody3D" method="set_gimbal_command"]

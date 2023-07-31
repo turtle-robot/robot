@@ -1,7 +1,13 @@
 extends VehicleBody3D
 
+# The lists of wheels so they can be iterated during
+# the process loop.
 var wheels_left = []
 var wheels_right = []
+
+# Store the commanded drive as a Vec2
+# (left, right)
+var drive_command = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,26 +32,13 @@ func _process(_delta):
 	pass
 
 func _physics_process(_delta):
-	var left_throttle = 0.0
-	var right_throttle = 0.0
-	if Input.is_action_pressed("ui_up"):
-		left_throttle += 1
-		right_throttle += 1
-	elif Input.is_action_pressed("ui_down"):
-		left_throttle -= 1
-		right_throttle -= 1
-	
-	if Input.is_action_pressed("ui_right"):
-		left_throttle += 10
-		right_throttle -= 10
-	
-	if Input.is_action_pressed("ui_left"):
-		left_throttle -= 10
-		right_throttle += 10
-	
 	for wheel in wheels_left:
-		wheel.set_engine_force(left_throttle * 10.0)
-	
+		wheel.set_engine_force(drive_command.x)
 	for wheel in wheels_right:
-		wheel.set_engine_force(right_throttle * 10.0)
-		
+		wheel.set_engine_force(drive_command.y)
+
+func set_drive_command(val: Vector2):
+	drive_command = val
+
+func set_gimbal_command(val: Vector2):
+	pass

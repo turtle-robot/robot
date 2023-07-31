@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://baf15220grttu"]
+[gd_scene load_steps=9 format=3 uid="uid://baf15220grttu"]
 
 [ext_resource type="Shape3D" uid="uid://d4iea6yuwkrq1" path="res://car_parts/tank_collider_array.tres" id="1_a05lj"]
 [ext_resource type="Script" path="res://car_parts/tank.gd" id="1_i5jhv"]
-[ext_resource type="Material" uid="uid://dxk6d56le54rd" path="res://car_parts/TankBody.tres" id="2_kql8l"]
 [ext_resource type="PackedScene" uid="uid://cybb6xst5ajd2" path="res://car_parts/wheel.tscn" id="3_38dfs"]
+[ext_resource type="Material" uid="uid://dxk6d56le54rd" path="res://car_parts/TankBody.tres" id="3_plk6e"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_6nbdy"]
 size = Vector3(2, 1, 6)
@@ -15,6 +15,16 @@ size = Vector3(2, 1, 4)
 left_to_right = 1.11022e-16
 size = Vector3(1, 1, 2)
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_dqgdt"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
+properties/1/watch = false
+
 [node name="VehicleBody3D" type="VehicleBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29179, 0)
 script = ExtResource("1_i5jhv")
@@ -24,23 +34,23 @@ shape = ExtResource("1_a05lj")
 
 [node name="BodyBox" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-material_override = ExtResource("2_kql8l")
+material_override = ExtResource("3_plk6e")
 mesh = SubResource("BoxMesh_6nbdy")
 
 [node name="BodyBox2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-material_override = ExtResource("2_kql8l")
+material_override = ExtResource("3_plk6e")
 mesh = SubResource("BoxMesh_sauxo")
 
 [node name="FrontAngle" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.5, 2.5)
-material_override = ExtResource("2_kql8l")
+material_override = ExtResource("3_plk6e")
 mesh = SubResource("PrismMesh_o6gts")
 skeleton = NodePath("../BodyBox")
 
 [node name="BackAngle" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.5, -2.5)
-material_override = ExtResource("2_kql8l")
+material_override = ExtResource("3_plk6e")
 mesh = SubResource("PrismMesh_o6gts")
 skeleton = NodePath("../BodyBox")
 
@@ -73,3 +83,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, -1, -1.6)
 
 [node name="Wheel_R5" parent="." instance=ExtResource("3_38dfs")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1.2, -0.5, -3.1)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_dqgdt")
