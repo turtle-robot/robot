@@ -17,10 +17,18 @@ this sets the position of the gimbal
 
 accepts "angle" (in degrees) values between 0 and 180
 
-0 for pan is full lock left
-90 for pan is straight forward
-180 for pan is full lock right
+### pan
 
-0 for tilt is full lock down
-90 for tilt is straight forward
-180 for tilt is full lock up
+0 = full lock left
+
+90 = straight forward
+
+180 = full lock right
+
+### tilt
+
+0 = full lock down
+
+90 = straight forward
+
+180 = full lock up
