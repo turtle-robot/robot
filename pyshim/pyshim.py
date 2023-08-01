@@ -10,10 +10,13 @@ import sys
 import time
 from adafruit_servokit import ServoKit
 from adafruit_motorkit import MotorKit
+import board
+import busio
 
+i2c = busio.I2C(board.SCL, board.SDA)
 
-mk = MotorKit(address=0x60)
-sk = ServoKit(address=0x60)
+mk = MotorKit(address=0x60, i2c=i2c)
+sk = ServoKit(address=0x60, i2c=i2c, channels=16)
 
 def test_throttle_oob(value):
     if value > 1.0:
@@ -25,7 +28,8 @@ def test_throttle_oob(value):
 
 def main():
     for line in sys.stdin:
-        match line.split(" ")[0]:
+        cmd = line.split(" ")[0]
+        match cmd:
             case "q":
                 break
             case ("throttle", left, right, ):
