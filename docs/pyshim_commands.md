@@ -19,16 +19,16 @@ accepts "angle" (in degrees) values between 0 and 180
 
 ### pan
 
-0 = full lock left
+0 = full lock right
 
 90 = straight forward
 
-180 = full lock right
+180 = full lock left
 
 ### tilt
 
-0 = full lock down
+0 = full lock up
 
 90 = straight forward
 
-180 = full lock up
+180 = full lock down
