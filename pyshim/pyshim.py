@@ -43,7 +43,7 @@ def main():
                 break
             case ["throttle", left, right, ]:
                 # test if left throttle is out of bounds, break if true
-                left = -float(left) #TODO flip wires on m1 terminal and remove neg
+                left = float(left)
                 right = float(right)
                 if test_throttle_oob(left):
                     sys.stderr.write("LEFT THROTTLE OUT OF BOUNDS")
